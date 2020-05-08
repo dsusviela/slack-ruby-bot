@@ -302,6 +302,8 @@ class Phone < SlackRubyBot::Commands::Base
 end
 ```
 
+Something worth mentioning is that the `call` method itself receives a `client` vairable, which is an instance of `SlackRubyBot::Client` and  that class inherits from `Slack::Realtime::Client`. Through this inheritance, you can use `client`'s attribute called `web_client` which grants access to a vast array of endpoints. This could prove useful if you want to access other API methods like `chat_postMessage`, or `chat_scheduleMessage`. Please note that using these methods will open a new connection every time you call an API which will rise performance issues. Reuse of the already opened connection is in the works.
+
 ### Authorization
 
 The framework does not provide any user authentication or command authorization capability out of the box. However, the `SlackRubyBot::Commands::Base` class does check every command invocation for permission prior to executing the command. The default method always returns true.
